@@ -32,6 +32,7 @@
 
 #import "Threads.h"
 
+#import "LogitechButtonDiverter.h"
 #import "SharedUtility.h"
 #import "Mac_Mouse_Fix_Helper-Swift.h"
 
@@ -103,9 +104,11 @@ static NSMutableDictionary<NSNumber *, Device *> *_iohidToAttachedCache;
 + (void)load_Manual {
     setupDeviceMatchingAndRemovalCallbacks();
     _attachedDevices = [NSMutableArray array];
+    [LogitechButtonDiverter load_Manual];
 }
 
 + (void)deconfigureDevices {
+    [LogitechButtonDiverter restoreNativeBehavior];
 
     /// Meant to be called when the app closes
 
